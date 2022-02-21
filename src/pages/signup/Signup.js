@@ -26,6 +26,7 @@ const Signup = () => {
           type="text"
           onChange={(e) => setName(e.target.value)}
           value={name}
+          required
         />
       </label>
       <label>
@@ -34,6 +35,7 @@ const Signup = () => {
           type="email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
+          required
         />
       </label>
       <label>
@@ -42,6 +44,7 @@ const Signup = () => {
           type="password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
+          required
         />
       </label>
 
