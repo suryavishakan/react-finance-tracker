@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useFirestore } from "../../hooks/useFirestore";
 
-const TransactionForm = () => {
+const TransactionForm = ({ uid }) => {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
+  const { addDocument, response } = useFirestore("transactions");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({
+    addDocument({
+      uid,
       name,
       amount,
     });
-    setName("");
-    setAmount("");
+    console.log(uid, name, amount);
   };
+
+  useEffect(() => {
+    if (response.success) {
+      setName("");
+      setAmount("");
+    }
+  }, [response.success]);
 
   return (
     <>
@@ -32,6 +41,7 @@ const TransactionForm = () => {
           <input
             type="number"
             required
+            min="1"
             onChange={(e) => setAmount(e.target.value)}
             value={amount}
           />
